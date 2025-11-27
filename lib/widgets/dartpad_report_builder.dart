@@ -646,22 +646,60 @@ class _DartPadReportBuilderState extends State<DartPadReportBuilder> {
         backgroundColor: const Color(0xFF3C3F41),
         title: const Text('Выберите шаблон', style: TextStyle(color: Colors.white)),
         content: SizedBox(
-          width: 500,
-          height: 450,
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView(
-                  children: [
-                    _buildTemplateItem('Простой отчет', 'simple'),
-                    _buildTemplateItem('Карточный отчет', 'card'),
-                    _buildTemplateItem('Табличный отчет', 'table'),
-                    _buildTemplateItem('Статистический отчет', 'stats'),
-                    _buildTemplateItem('Список задач', 'list'),
-                  ],
+          width: 600,
+          height: 600,
+          child: DefaultTabController(
+            length: 3,
+            child: Column(
+              children: [
+                Container(
+                  color: const Color(0xFF4C4C4C),
+                  child: const TabBar(
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.white70,
+                    indicatorColor: Color(0xFF4CAF50),
+                    tabs: [
+                      Tab(text: 'Базовые'),
+                      Tab(text: 'Стили'),
+                      Tab(text: 'Макеты'),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      // Базовые шаблоны
+                      ListView(
+                        children: [
+                          _buildTemplateItem('Простой отчет', 'simple'),
+                          _buildTemplateItem('Карточный отчет', 'card'),
+                          _buildTemplateItem('Табличный отчет', 'table'),
+                          _buildTemplateItem('Статистический отчет', 'stats'),
+                          _buildTemplateItem('Список задач', 'list'),
+                          _buildTemplateItem('Примеры текста', 'textExamples'),
+                        ],
+                      ),
+                      // Стили и декорации
+                      ListView(
+                        children: [
+                          _buildTemplateItem('Типография', 'typographyExamples'),
+                          _buildTemplateItem('Декорации', 'decorationExamples'),
+                          _buildTemplateItem('Интерактивные', 'interactiveExamples'),
+                        ],
+                      ),
+                      // Макеты
+                      ListView(
+                        children: [
+                          _buildTemplateItem('Расширенная верстка', 'advancedLayout'),
+                          _buildTemplateItem('Сетки и списки', 'gridExamples'),
+                          _buildTemplateItem('Комплексный макет', 'complexLayout'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

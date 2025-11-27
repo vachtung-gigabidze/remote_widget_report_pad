@@ -785,16 +785,16 @@ widget root = Container(
   static const Map<String, dynamic> textExamplesData = {"value": "12345"};
 
   // Дополнительные шаблоны
-  static const Map<String, String> allTemplates = {'simple': simpleReport, 'card': cardReport, 'table': tableReport, 'stats': statsReport, 'list': listReport, 'textExamples': textExamples};
+  // static const Map<String, String> allTemplates = {'simple': simpleReport, 'card': cardReport, 'table': tableReport, 'stats': statsReport, 'list': listReport, 'textExamples': textExamples};
 
-  static const Map<String, Map<String, dynamic>> allTemplateData = {
-    'simple': simpleReportData,
-    'card': cardReportData,
-    'table': tableReportData,
-    'stats': statsReportData,
-    'list': listReportData,
-    'textExamples': textExamplesData,
-  };
+  // static const Map<String, Map<String, dynamic>> allTemplateData = {
+  //   'simple': simpleReportData,
+  //   'card': cardReportData,
+  //   'table': tableReportData,
+  //   'stats': statsReportData,
+  //   'list': listReportData,
+  //   'textExamples': textExamplesData,
+  // };
 
   // Коды Material Icons для справки
   static const Map<String, int> materialIcons = {
@@ -809,5 +809,790 @@ widget root = Container(
     'check_circle': 0xe8e5,
 
     'attach_money': 0xe63a,
+  };
+
+  static const String advancedLayout = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  child: Column(
+    mainAxisAlignment: "start",
+    crossAxisAlignment: "center",
+    children: [
+      Text(
+        text: "Расширенная верстка",
+        style: {
+          "fontSize": 24.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+      ),
+      SizedBox(height: 20.0),
+      
+      // Row с разным выравниванием
+      Container(
+        width: "infinity",
+        padding: [12.0, 12.0, 12.0, 12.0],
+        decoration: {
+          "color": 0xFFF5F5F5,
+          "borderRadius": 8.0,
+          "border": [
+            {
+              "width": 2.0,
+              "color": 0xFF2196F3,
+            }
+          ],
+        },
+        child: Column(
+          children: [
+            Text(
+              text: "Row с MainAxisAlignment",
+              style: {
+                "fontSize": 16.0,
+                "fontWeight": "bold",
+              },
+            ),
+            SizedBox(height: 8.0),
+            Row(
+              mainAxisAlignment: "spaceBetween",
+              children: [
+                Container(
+                  width: 50.0,
+                  height: 50.0,
+                  color: 0xFFFF5252,
+                ),
+                Container(
+                  width: 50.0,
+                  height: 50.0,
+                  color: 0xFF4CAF50,
+                ),
+                Container(
+                  width: 50.0,
+                  height: 50.0,
+                  color: 0xFF2196F3,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // Expanded и Flex
+      Container(
+        width: "infinity",
+        height: 100.0,
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                color: 0xFFFF9800,
+                child: Center(
+                  child: Text(
+                    text: "Flex: 2",
+                    style: {
+                      "color": 0xFFFFFFFF,
+                      "fontWeight": "bold",
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                color: 0xFF2196F3,
+                child: Center(
+                  child: Text(
+                    text: "Flex: 3",
+                    style: {
+                      "color": 0xFFFFFFFF,
+                      "fontWeight": "bold",
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // Stack с позиционированием
+      Container(
+        width: 200.0,
+        height: 120.0,
+        child: Stack(
+          children: [
+            Container(
+              width: "infinity",
+              height: "infinity",
+              color: 0xFFE3F2FD,
+            ),
+            Positioned(
+              left: 10.0,
+              top: 10.0,
+              child: Container(
+                width: 60.0,
+                height: 60.0,
+                color: 0xFFFF5252,
+              ),
+            ),
+            Positioned(
+              right: 10.0,
+              bottom: 10.0,
+              child: Container(
+                width: 60.0,
+                height: 60.0,
+                color: 0xFF4CAF50,
+              ),
+            ),
+            Align(
+              alignment: {"x": 0.5, "y": 0.5},
+              child: Container(
+                width: 40.0,
+                height: 40.0,
+                color: 0xFFFFEB3B,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+);
+''';
+
+  static const String decorationExamples = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  child: Column(
+    children: [
+      Text(
+        text: "Примеры декораций",
+        style: {
+          "fontSize": 24.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+      ),
+      SizedBox(height: 20.0),
+      
+      // BoxDecoration с градиентом
+      Container(
+        width: 200.0,
+        height: 100.0,
+        decoration: {
+          "type": "box",
+          "gradient": {
+            "type": "linear",
+            "begin": {"x": 0.0, "y": 0.0},
+            "end": {"x": 1.0, "y": 1.0},
+            "colors": [0xFFFF5252, 0xFFFF9800, 0xFF4CAF50],
+            "stops": [0.0, 0.5, 1.0],
+          },
+          "borderRadius": [12.0, 12.0, 12.0, 12.0],
+          "boxShadow": [
+            {
+              "blurRadius": 8.0,
+              "offset": {"dx": 2.0, "dy": 2.0},
+              "color": 0x33000000,
+            },
+          ],
+        },
+        child: Center(
+          child: Text(
+            text: "Линейный градиент",
+            style: {
+              "color": 0xFFFFFFFF,
+              "fontWeight": "bold",
+            },
+          ),
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // RoundedRectangleBorder
+      Container(
+        width: 200.0,
+        height: 80.0,
+        decoration: {
+          "type": "shape",
+          "shape": {
+            "type": "rounded",
+            "borderRadius": [20.0, 20.0, 20.0, 20.0],
+          },
+          "color": 0xFF2196F3,
+        },
+        child: Center(
+          child: Text(
+            text: "Rounded Border",
+            style: {
+              "color": 0xFFFFFFFF,
+            },
+          ),
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // Border с разными сторонами
+      Container(
+        width: 200.0,
+        height: 80.0,
+        decoration: {
+          "type": "box",
+          "color": 0xFFE8F5E8,
+          "border": [
+            {
+              "width": 4.0,
+              "color": 0xFF4CAF50,
+            },
+            {
+              "width": 2.0,
+              "color": 0xFF81C784,
+            },
+            {
+              "width": 4.0,
+              "color": 0xFF4CAF50,
+            },
+            {
+              "width": 2.0,
+              "color": 0xFF81C784,
+            },
+          ],
+        ),
+        child: Center(
+          child: Text(
+            text: "Разные границы",
+            style: {
+              "color": 0xFF2E7D32,
+            },
+          ),
+        ),
+      ),
+    ],
+  ),
+);
+''';
+
+  static const String typographyExamples = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  child: Column(
+    crossAxisAlignment: "start",
+    children: [
+      Text(
+        text: "Типография и текст",
+        style: {
+          "fontSize": 24.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+      ),
+      SizedBox(height: 20.0),
+      
+      // Разные стили текста
+      Text(
+        text: "Обычный текст",
+        style: {
+          "fontSize": 16.0,
+          "color": 0xFF000000,
+        },
+      ),
+      SizedBox(height: 8.0),
+      
+      Text(
+        text: "Жирный текст",
+        style: {
+          "fontSize": 16.0,
+          "fontWeight": "bold",
+          "color": 0xFFD32F2F,
+        },
+      ),
+      SizedBox(height: 8.0),
+      
+      Text(
+        text: "Курсивный текст",
+        style: {
+          "fontSize": 16.0,
+          "fontStyle": "italic",
+          "color": 0xFF1976D2,
+        },
+      ),
+      SizedBox(height: 8.0),
+      
+      Text(
+        text: "Подчеркнутый текст",
+        style: {
+          "fontSize": 16.0,
+          "decoration": "underline",
+          "color": 0xFF388E3C,
+        },
+      ),
+      SizedBox(height: 8.0),
+      
+      Text(
+        text: "Зачеркнутый текст",
+        style: {
+          "fontSize": 16.0,
+          "decoration": "lineThrough",
+          "color": 0xFFF57C00,
+        },
+      ),
+      SizedBox(height: 16.0),
+      
+      // Текст с тенью
+      Text(
+        text: "Текст с тенью",
+        style: {
+          "fontSize": 20.0,
+          "fontWeight": "bold",
+          "color": 0xFFFFFFFF,
+          "shadows": [
+            {
+              "blurRadius": 4.0,
+              "offset": {"dx": 2.0, "dy": 2.0},
+              "color": 0x66000000,
+            },
+          ],
+        },
+      ),
+      SizedBox(height: 16.0),
+      
+      // Многострочный текст
+      Container(
+        width: 200.0,
+        child: Text(
+          text: "Это очень длинный текст, который должен переноситься на несколько строк для демонстрации работы текстового виджета",
+          style: {
+            "fontSize": 14.0,
+            "color": 0xFF666666,
+          },
+          textAlign: "center",
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // Rich Text (через конкатенацию)
+      Text(
+        text: [
+          "Обычный текст, ",
+          "жирный текст",
+        ],
+        style: {
+          "fontSize": 16.0,
+        },
+      ),
+    ],
+  ),
+);
+''';
+
+  static const String interactiveExamples = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  child: Column(
+    children: [
+      Text(
+        text: "Интерактивные элементы",
+        style: {
+          "fontSize": 24.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+      ),
+      SizedBox(height: 20.0),
+      
+      // Кнопки
+      Row(
+        mainAxisAlignment: "spaceAround",
+        children: [
+          ElevatedButton(
+            onPressed: {
+              "action": "showMessage",
+              "args": {"message": "Primary кнопка нажата!"}
+            },
+            child: Text(text: "Primary"),
+          ),
+          OutlinedButton(
+            onPressed: {
+              "action": "showMessage", 
+              "args": {"message": "Outlined кнопка нажата!"}
+            },
+            child: Text(text: "Outlined"),
+          ),
+          TextButton(
+            onPressed: {
+              "action": "showMessage",
+              "args": {"message": "Text кнопка нажата!"}
+            },
+            child: Text(text: "Text"),
+          ),
+        ],
+      ),
+      SizedBox(height: 16.0),
+      
+      // Карточка с интерактивностью
+      GestureDetector(
+        onTap: {
+          "action": "showMessage",
+          "args": {"message": "Карточка нажата!"}
+        },
+        child: Container(
+          width: 200.0,
+          height: 100.0,
+          decoration: {
+            "color": 0xFFE3F2FD,
+            "borderRadius": 12.0,
+            "boxShadow": [
+              {
+                "blurRadius": 6.0,
+                "offset": {"dx": 0.0, "dy": 2.0},
+                "color": 0x33000000,
+              },
+            ],
+          },
+          child: Center(
+            child: Column(
+              mainAxisAlignment: "center",
+              children: [
+                Icon(
+                  icon: {
+                    "icon": 0xe5d5,
+                    "fontFamily": "MaterialIcons"
+                  },
+                  color: 0xFF2196F3,
+                  size: 32.0,
+                ),
+                Text(
+                  text: "Нажми меня",
+                  style: {
+                    "color": 0xFF1976D2,
+                    "fontWeight": "bold",
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // Индикатор прогресса
+      Column(
+        children: [
+          Text(
+            text: "Линейный прогресс",
+            style: {
+              "fontSize": 14.0,
+              "color": 0xFF666666,
+            },
+          ),
+          SizedBox(height: 8.0),
+          LinearProgressIndicator(
+            value: 0.7,
+            backgroundColor: 0xFFE0E0E0,
+            valueColor: 0xFF4CAF50,
+          ),
+          SizedBox(height: 16.0),
+          Text(
+            text: "Круговой прогресс",
+            style: {
+              "fontSize": 14.0,
+              "color": 0xFF666666,
+            },
+          ),
+          SizedBox(height: 8.0),
+          CircularProgressIndicator(
+            value: 0.5,
+            backgroundColor: 0xFFE0E0E0,
+            valueColor: 0xFF2196F3,
+          ),
+        ],
+      ),
+    ],
+  ),
+);
+''';
+
+  static const String gridExamples = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  child: Column(
+    children: [
+      Text(
+        text: "Сетки и списки",
+        style: {
+          "fontSize": 24.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+      ),
+      SizedBox(height: 20.0),
+      
+      // GridView
+      Container(
+        height: 200.0,
+        child: GridView(
+          gridDelegate: {
+            "type": "fixedCrossAxisCount",
+            "crossAxisCount": 3,
+            "crossAxisSpacing": 8.0,
+            "mainAxisSpacing": 8.0,
+          },
+          children: [
+            Container(color: 0xFFFF5252, child: Center(child: Text(text: "1"))),
+            Container(color: 0xFFFF9800, child: Center(child: Text(text: "2"))),
+            Container(color: 0xFFFFEB3B, child: Center(child: Text(text: "3"))),
+            Container(color: 0xFF4CAF50, child: Center(child: Text(text: "4"))),
+            Container(color: 0xFF2196F3, child: Center(child: Text(text: "5"))),
+            Container(color: 0xFF9C27B0, child: Center(child: Text(text: "6"))),
+          ],
+        ),
+      ),
+      SizedBox(height: 16.0),
+      
+      // ListView
+      Container(
+        height: 150.0,
+        child: ListView(
+          children: [
+            ListTile(
+              leading: Icon(icon: {"icon": 0xe5d5, "fontFamily": "MaterialIcons"}, color: 0xFF4CAF50),
+              title: Text(text: "Первая строка"),
+              subtitle: Text(text: "Подзаголовок первой строки"),
+            ),
+            ListTile(
+              leading: Icon(icon: {"icon": 0xe8e5, "fontFamily": "MaterialIcons"}, color: 0xFF2196F3),
+              title: Text(text: "Вторая строка"),
+              subtitle: Text(text: "Подзаголовок второй строки"),
+            ),
+            ListTile(
+              leading: Icon(icon: {"icon": 0xe615, "fontFamily": "MaterialIcons"}, color: 0xFFFF9800),
+              title: Text(text: "Третья строка"),
+              subtitle: Text(text: "Подзаголовок третьей строки"),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+);
+''';
+
+  static const String complexLayout = '''
+import core.widgets;
+
+widget root = Container(
+  padding: [16.0, 16.0, 16.0, 16.0],
+  decoration: {
+    "type": "box",
+    "gradient": {
+      "type": "linear",
+      "begin": {"x": 0.0, "y": 0.0},
+      "end": {"x": 1.0, "y": 1.0},
+      "colors": [0xFFE3F2FD, 0xFFF3E5F5],
+    },
+  },
+  child: Column(
+    children: [
+      // Заголовок с иконкой
+      Row(
+        mainAxisAlignment: "center",
+        children: [
+          Icon(
+            icon: {"icon": 0xe869, "fontFamily": "MaterialIcons"},
+            color: 0xFF7B1FA2,
+            size: 32.0,
+          ),
+          SizedBox(width: 8.0),
+          Text(
+            text: "Комплексный макет",
+            style: {
+              "fontSize": 28.0,
+              "fontWeight": "bold",
+              "color": 0xFF7B1FA2,
+              "shadows": [
+                {
+                  "blurRadius": 2.0,
+                  "offset": {"dx": 1.0, "dy": 1.0},
+                  "color": 0x33FFFFFF,
+                },
+              ],
+            },
+          ),
+        ],
+      ),
+      SizedBox(height: 24.0),
+      
+      // Карточки в Wrap
+      Wrap(
+        spacing: 16.0,
+        runSpacing: 16.0,
+        alignment: "center",
+        children: [
+          _buildFeatureCard("Быстро", "Высокая производительность", 0xFFFF5252),
+          _buildFeatureCard("Надежно", "Стабильная работа", 0xFF4CAF50),
+          _buildFeatureCard("Удобно", "Простой интерфейс", 0xFF2196F3),
+          _buildFeatureCard("Гибко", "Настройка под задачи", 0xFFFF9800),
+        ],
+      ),
+      SizedBox(height: 24.0),
+      
+      // Статистика в Row
+      Container(
+        width: "infinity",
+        padding: [16.0, 16.0, 16.0, 16.0],
+        decoration: {
+          "type": "box",
+          "color": 0x22FFFFFF,
+          "borderRadius": 12.0,
+          "border": [
+            {
+              "width": 1.0,
+              "color": 0x33FFFFFF,
+            }
+          ],
+        },
+        child: Row(
+          mainAxisAlignment: "spaceAround",
+          children: [
+            _buildStatItem("Пользователи", "1.2K", 0xFF4CAF50),
+            _buildStatItem("Задачи", "356", 0xFF2196F3),
+            _buildStatItem("Проекты", "89", 0xFFFF9800),
+          ],
+        ),
+      ),
+    ],
+  ),
+);
+
+widget _buildFeatureCard = Container(
+  width: 150.0,
+  padding: [16.0, 16.0, 16.0, 16.0],
+  decoration: {
+    "type": "box",
+    "color": 0xFFFFFFFF,
+    "borderRadius": 12.0,
+    "boxShadow": [
+      {
+        "blurRadius": 8.0,
+        "offset": {"dx": 0.0, "dy": 4.0},
+        "color": 0x1A000000,
+      },
+    ],
+  },
+  child: Column(
+    children: [
+      Container(
+        width: 48.0,
+        height: 48.0,
+        decoration: {
+          "type": "box",
+          "color": [args.color],
+          "shape": "circle",
+        },
+        child: Icon(
+          icon: {"icon": 0xe5ca, "fontFamily": "MaterialIcons"},
+          color: 0xFFFFFFFF,
+          size: 24.0,
+        ),
+      ),
+      SizedBox(height: 8.0),
+      Text(
+        text: [args.title],
+        style: {
+          "fontSize": 16.0,
+          "fontWeight": "bold",
+          "color": 0xFF2C3E50,
+        },
+        textAlign: "center",
+      ),
+      SizedBox(height: 4.0),
+      Text(
+        text: [args.description],
+        style: {
+          "fontSize": 12.0,
+          "color": 0xFF666666,
+        },
+        textAlign: "center",
+      ),
+    ],
+  ),
+);
+
+widget _buildStatItem = Column(
+  children: [
+    Text(
+      text: [args.value],
+      style: {
+        "fontSize": 24.0,
+        "fontWeight": "bold",
+        "color": [args.color],
+      },
+    ),
+    Text(
+      text: [args.label],
+      style: {
+        "fontSize": 12.0,
+        "color": 0xFF666666,
+      },
+    ),
+  ],
+);
+''';
+
+  // Тестовые данные для новых шаблонов
+  static const Map<String, dynamic> advancedLayoutData = {"title": "Расширенная верстка"};
+
+  static const Map<String, dynamic> decorationExamplesData = {"title": "Примеры декораций"};
+
+  static const Map<String, dynamic> typographyExamplesData = {"title": "Типография и текст"};
+
+  static const Map<String, dynamic> interactiveExamplesData = {"title": "Интерактивные элементы"};
+
+  static const Map<String, dynamic> gridExamplesData = {"title": "Сетки и списки"};
+
+  static const Map<String, dynamic> complexLayoutData = {"title": "Комплексный макет"};
+
+  // Обновляем список всех шаблонов
+  static const Map<String, String> allTemplates = {
+    'simple': simpleReport,
+    'card': cardReport,
+    'table': tableReport,
+    'stats': statsReport,
+    'list': listReport,
+    'textExamples': textExamples,
+    'advancedLayout': advancedLayout,
+    'decorationExamples': decorationExamples,
+    'typographyExamples': typographyExamples,
+    'interactiveExamples': interactiveExamples,
+    'gridExamples': gridExamples,
+    'complexLayout': complexLayout,
+  };
+
+  static const Map<String, Map<String, dynamic>> allTemplateData = {
+    'simple': simpleReportData,
+    'card': cardReportData,
+    'table': tableReportData,
+    'stats': statsReportData,
+    'list': listReportData,
+    'textExamples': textExamplesData,
+    'advancedLayout': advancedLayoutData,
+    'decorationExamples': decorationExamplesData,
+    'typographyExamples': typographyExamplesData,
+    'interactiveExamples': interactiveExamplesData,
+    'gridExamples': gridExamplesData,
+    'complexLayout': complexLayoutData,
   };
 }
