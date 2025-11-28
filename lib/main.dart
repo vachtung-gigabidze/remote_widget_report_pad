@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:widget_report_constructor/visual_editor/app.dart';
 import 'providers/report_provider.dart';
 import 'widgets/dartpad_report_builder.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(appRun());
 }
 
 class MyApp extends StatelessWidget {
