@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../data/rfw_widgets.dart';
 
-class PropertyEditors {
+class PropertyEditors2 {
   static Widget buildPropertyEditor(String propertyName, String propertyType, dynamic currentValue, Function(dynamic) onChanged) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

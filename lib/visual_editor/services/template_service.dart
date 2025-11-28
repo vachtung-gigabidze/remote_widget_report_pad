@@ -6,7 +6,7 @@ class TemplateService extends ChangeNotifier {
   Template _currentTemplate = Template(
     name: 'Новый шаблон',
     code: 'import core.widgets;\n\nwidget root = Container();',
-    root: TemplateNode(type: 'Container', properties: {}, children: []),
+    root: TemplateNode(type: 'Container', properties: {}, children: [], id: 'root', name: 'Container'),
     testData: {},
   );
 
@@ -91,7 +91,7 @@ class TemplateService extends ChangeNotifier {
 
   TemplateNode _removeNodeRecursive(TemplateNode currentNode, TemplateNode targetNode) {
     if (currentNode.id == targetNode.id) {
-      return TemplateNode(type: 'Container', properties: {});
+      return TemplateNode(type: 'Container', properties: {}, id: 'root', name: 'Container');
     }
 
     return currentNode.copyWith(children: currentNode.children.where((child) => child.id != targetNode.id).map((child) => _removeNodeRecursive(child, targetNode)).toList());
@@ -110,24 +110,23 @@ class TemplateService extends ChangeNotifier {
     final buffer = StringBuffer();
     buffer.write("${node.type}(");
 
-    // Добавляем свойства
     final properties = node.properties;
-    if (properties.isNotEmpty) {
-      final propertyEntries = properties.entries.where((entry) => entry.value != null).toList();
-      for (int i = 0; i < propertyEntries.length; i++) {
-        final entry = propertyEntries[i];
-        buffer.write("${entry.key}: ${_valueToCode(entry.value)}");
-        if (i < propertyEntries.length - 1 || node.children.isNotEmpty) {
-          buffer.write(", ");
-        }
+    final propertyEntries = properties.entries.where((entry) => entry.value != null).toList();
+
+    for (int i = 0; i < propertyEntries.length; i++) {
+      final entry = propertyEntries[i];
+      buffer.write("${entry.key}: ${_valueToCode(entry.value)}");
+      if (i < propertyEntries.length - 1 || node.children.isNotEmpty) {
+        buffer.write(", ");
       }
     }
 
-    // Добавляем дочерние элементы
     if (node.children.isNotEmpty) {
       if (node.children.length == 1) {
+        if (propertyEntries.isNotEmpty) buffer.write(", ");
         buffer.write("child: ${_nodeToCode(node.children.first)}");
       } else {
+        if (propertyEntries.isNotEmpty) buffer.write(", ");
         buffer.write("children: [");
         for (int i = 0; i < node.children.length; i++) {
           buffer.write(_nodeToCode(node.children[i]));
@@ -155,7 +154,8 @@ class TemplateService extends ChangeNotifier {
     } else if (value is List) {
       return '[${value.map(_valueToCode).join(', ')}]';
     } else if (value is Map) {
-      return '{${value.entries.map((e) => '${e.key}: ${_valueToCode(e.value)}').join(', ')}}';
+      final entries = value.entries.where((e) => e.value != null).toList();
+      return '{${entries.map((e) => '"${e.key}": ${_valueToCode(e.value)}').join(', ')}}';
     }
 
     return value.toString();
@@ -185,8 +185,11 @@ class TemplateService extends ChangeNotifier {
   }
 
   void loadTemplate(Template template) {
-    updateTemplate(template);
-    selectNode(null);
+    _undoStack.clear();
+    _redoStack.clear();
+    _currentTemplate = template;
+    _selectedNode = null;
+    notifyListeners();
   }
 
   void updateCode(String newCode) {
@@ -194,14 +197,12 @@ class TemplateService extends ChangeNotifier {
       final newRoot = _parseCodeToNode(newCode);
       updateTemplate(_currentTemplate.copyWith(code: newCode, root: newRoot));
     } catch (e) {
-      // В реальном приложении нужно показать ошибку
       print('Ошибка парсинга кода: $e');
     }
   }
 
   TemplateNode _parseCodeToNode(String code) {
-    // Упрощенный парсинг - в реальном приложении нужен полноценный парсер RFW
-    // Здесь просто возвращаем базовый контейнер
-    return TemplateNode(type: 'Container', properties: {}, children: []);
+    // Упрощенный парсинг для демонстрации
+    return TemplateNode(type: 'Container', properties: {}, children: [], id: 'root', name: 'Container');
   }
 }
